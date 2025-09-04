@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplashScreen Demo (Web Preview)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 { text-align: center; margin-bottom: 30px; font-size: 2.5em; }
+        .demo-section { margin: 30px 0; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; }
+        .demo-section h3 { color: #ffd700; margin-bottom: 15px; }
+        .button-group { display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0; }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none; padding: 12px 24px; border-radius: 25px;
+            color: white; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; font-size: 14px;
+        }
+        
+        .status { margin: 15px 0; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; font-weight: 500; }
+        .platform-info { background: rgba(255, 165, 0, 0.1); border-radius: 8px; padding: 10px; margin: 10px 0; border-left: 4px solid #ffa500; }
+        
+        /* Splash Screen Overlay */
+        .mock-splash {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: none; justify-content: center; align-items: center;
+            z-index: 1000; flex-direction: column;
+        }
+        .mock-splash.show { display: flex; }
+        .splash-content { text-align: center; color: white; }
+        .splash-logo { font-size: 4em; margin-bottom: 20px; }
+        .fade-out { animation: fadeOut 0.5s ease-out forwards; }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SplashScreen Demo (Web Preview)</h1>
+        
+        <div class="platform-info">
+            <strong>Platform:</strong> Web Browser<br>
+            <em>This shows how the splash screen will look on mobile!</em>
+        </div>
+        
+        <div class="demo-section">
+            <h3>Plugin Methods Preview</h3>
+            <div class="button-group">
+                <button onclick="showRealSplash()">Show Splash</button>
+                <button onclick="hideRealSplash()">Hide Splash</button>
+                <button onclick="showWithDuration()">Show for 3s</button>
+            </div>
+            <div class="status" id="status">Web preview ready - click buttons to test!</div>
+        </div>
+    </div>
+    
+    <!-- Mock Splash Screen -->
+    <div class="mock-splash" id="mockSplash">
+        <div class="splash-content">
+            <div class="splash-logo">⚡</div>
+            <h2>Your App Name</h2>
+        </div>
+    </div>
+    
+    <script>
+        function updateStatus(msg) {
+            document.getElementById('status').textContent = msg;
+        }
+        
+        function showRealSplash() {
+            updateStatus('SplashScreen.show() called - Splash displayed!');
+            document.getElementById('mockSplash').classList.add('show');
+        }
+        
+        function hideRealSplash() {
+            updateStatus('SplashScreen.hide() called - Splash hidden!');
+            const splash = document.getElementById('mockSplash');
+            splash.classList.add('fade-out');
+            setTimeout(() => {
+                splash.classList.remove('show', 'fade-out');
+            }, 500);
+        }
+        
+        function showWithDuration() {
+            updateStatus('Showing splash for 3 seconds...');
+            showRealSplash();
+            setTimeout(() => {
+                updateStatus('Auto-hiding after 3 seconds');
+                hideRealSplash();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

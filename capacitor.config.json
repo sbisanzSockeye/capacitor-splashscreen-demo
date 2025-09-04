@@ -1,0 +1,10 @@
+{
+  "appId": "com.example.splashscreendemo",
+  "appName": "SplashScreen Demo",
+  "webDir": "src",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
