@@ -7,8 +7,8 @@
       "launchAutoHide": true,
       "launchShowDuration": 2000,
       "launchFadeOutDuration": 500,
-      "backgroundColor": "#667eea",
-      "showSpinner": false,
+      "backgroundColor": "#ffffff",
+      "showSpinner": true,
       "splashFullScreen": true
     }
   }
